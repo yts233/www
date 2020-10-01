@@ -1,0 +1,91 @@
+{
+    "refresh": "Page need reload",
+    "title": {
+        "index": "Home Page",
+        "settings": "Site Preferences",
+        "search": "Search Result"
+    },
+    "appbar": {
+        "menu": "Menu",
+        "like": "Likes",
+        "upgrade": "Upgrade",
+        "search": "Search",
+        "more": "More",
+        "moreMenu": {
+            "thumbUp": "Thumb Up",
+            "comment": "Comments",
+            "share": "Share",
+            "settings": "Settings"
+        }
+    },
+    "sidebar": {
+        "home": "Home Page",
+        "random": "Random Archive",
+        "latest": "Latest Archives",
+        "comment": "Latest Comments",
+        "monthly": "Monthly Archives"
+    },
+    "dialog": {
+        "ok": "OK",
+        "cancel": "Cancel",
+        "yes": "Yes",
+        "no": "No",
+        "retry": "Retry",
+        "ignore": "Ignore"
+    },
+    "settings": {
+        "type": {
+            "general": "General",
+            "advanced": "Advanced"
+        },
+        "dynamicLoad": {
+            "title": "Dynamic Loading",
+            "describe": "Load pages dynamically to switch pages without refreshing."
+        },
+        "language": {
+            "title": "Language",
+            "describe": "Choose the languages used to display menus, messages, and notifications from this website.",
+            "refresh": "Refresh the page to take effect."
+        },
+        "source": {
+            "title": "Source",
+            "describe": "Change the source of the website."
+        },
+        "delete": {
+            "title": "Delete Settings",
+            "describe": "This will delete all current settings.",
+            "delete": "Delete"
+        }
+    },
+    "upgrade": {
+        "title": "Your browser needs to be updated",
+        "subtitle1": "Your browser may not display this page properly,",
+        "subtitle2": "please use the following new browser",
+        "chrome": {
+            "name": "Chrome",
+            "describe": "Google launched a fast, simple, stable and secure browser",
+            "url": "https://www.google.com/chrome"
+        },
+        "firefox": {
+            "name": "Firefox",
+            "describe": "The fastest browser",
+            "url": "https://www.mozilla.org/firefox"
+        },
+        "safari": {
+            "name": "Safari",
+            "describe": "Apple designed products for Mac",
+            "url": "https://www.apple.com/safari"
+        },
+        "opera": {
+            "name": "Opera",
+            "describe": "Fast, small browser",
+            "url": "https://www.opera.com"
+        },
+        "try": "Try Chrome",
+        "nope": "Nope"
+    },
+    "footer": {
+        "run1": "This site has been running for ",
+        "run2": " days"
+    }
+}

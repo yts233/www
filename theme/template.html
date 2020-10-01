@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta id="doctitle" content="模板页">
+    <meta id="title" content="模板页">
+    <meta id="aid" content="-1">
+    <meta name="author" content="Ye_Tianshun">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <link href="/theme/css/material.css" rel="stylesheet">
+    <script src="/theme/js/material.js"></script>
+    <link href="/theme/css/Roboto.css" rel="stylesheet">
+    <link href="/theme/css/MaterialIcons.css" rel="stylesheet">
+    <link href="/theme/css/main.css" rel="stylesheet">
+    <script src="/theme/js/jquery.js"></script>
+    <script>
+        $.ajaxSettings.async = false;
+        var lang = $.get("/theme/lang/" + (navigator.language.substring(0, 2) == 'zh' ? 'zh_CN' : 'en_US') + '.json').responseJSON;
+        $.ajaxSettings.async = true;
+        onload = function () {
+            window.content = "模板页";
+            var tmp1 = document.body.innerHTML.match(/\$\{.*?\}/sg);
+            var tmp2 = document.body.innerHTML;
+            for (var i = 0; i < tmp1.length; i++) {
+                try { tmp2 = tmp2.replace(tmp1[i], eval('`' + tmp1[i] + '`')) } catch (e) { };
+            }
+            document.body.innerHTML = tmp2;
+        }
+    </script>
+    <script src="/theme/js/main.js"></script>
+</head>
+
+<body>
+    <header class="mdc-top-app-bar">
+        <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button"
+                    aria-label="Open navigation menu" title="${lang.appbar.menu}">menu</button>
+                <span class="mdc-top-app-bar__title">${eval('`' + document.querySelector('#title').content.replace(/`/g,
+                    '\\`') + '`')}</span>
+            </section>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                <form class="search-form" action="/search">
+                    <label class="mdc-text-field mdc-text-field--no-label mdc-text-field--fullwidth search-text-field">
+                        <span class="mdc-text-field__ripple"></span>
+                        <input class="mdc-text-field__input" type="text" placeholder="Search" aria-label="Search">
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                </form>
+                <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button top-bar-button--search"
+                    aria-label="Search" title="${lang.appbar.search}">search</button>
+                <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button top-bar-button--more"
+                    aria-label="Options" title="${lang.appbar.more}">more_vert</button>
+                <div class="mdc-menu-surface--anchor">
+                    <div class="mdc-menu mdc-menu-surface top-app-bar-more-menu">
+                        <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
+                            <li class="mdc-list-item" role="menuitem" title="${likeCount}${lang.appbar.like}"
+                                onload="initLike()">
+                                <span class="mdc-list-item__graphic material-icons">thumb_up</span>
+                                <span class="mdc-list-item__text">${lang.appbar.moreMenu.thumbUp}</span>
+                            </li>
+                            <li class="mdc-list-item" role="menuitem" onclick="openComment()">
+                                <span class="mdc-list-item__graphic material-icons">forum</span>
+                                <span class="mdc-list-item__text">${lang.appbar.moreMenu.comment}</span>
+                            </li>
+                            <li class="mdc-list-item" role="menuitem">
+                                <span class="mdc-list-item__graphic material-icons">share</span>
+                                <span class="mdc-list-item__text">${lang.appbar.moreMenu.share}</span>
+                            </li>
+                            <li class="mdc-list-item" role="menuitem" onclick="changeUrl('/settings')">
+                                <span class="mdc-list-item__graphic material-icons">settings</span>
+                                <span class="mdc-list-item__text">${lang.appbar.moreMenu.settings}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </header>
+    <aside class="mdc-drawer mdc-drawer--modal">
+        <div class="mdc-drawer__header">
+            <h3 class="mdc-drawer__title">Ye_Tianshun</h3>
+            <h6 class="mdc-drawer__subtitle">creeper@yts233.tk</h6>
+        </div>
+        <div class="mdc-drawer__content">
+            <nav class="mdc-list" onclick="if(event.target.localName=='a')sideDrawerState(false)">
+                <a class="mdc-list-item mdc-list-item--activated" href="#" aria-current="page" tabindex="0"
+                    onclick="changeUrl('/')">
+                    <span class="mdc-list-item__ripple"></span>
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">home</i>
+                    <span class="mdc-list-item__text">${lang.sidebar.home}</span>
+                </a>
+                <a class="mdc-list-item" href="#" onclick="alert('开发中')">
+                    <span class="mdc-list-item__ripple"></span>
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">explore</i>
+                    <span class="mdc-list-item__text">${lang.sidebar.random}</span>
+                </a>
+                <a class="mdc-list-item" href="#" onclick="changeUrl('/latest')">
+                    <span class="mdc-list-item__ripple"></span>
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">library_books</i>
+                    <span class="mdc-list-item__text">${lang.sidebar.latest}</span>
+                </a>
+                <a class="mdc-list-item" href="#">
+                    <span class="mdc-list-item__ripple"></span>
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">forum</i>
+                    <span class="mdc-list-item__text">${lang.sidebar.comment}</span>
+                </a>
+                <a class="mdc-list-item" href="#">
+                    <span class="mdc-list-item__ripple"></span>
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
+                    <span class="mdc-list-item__text">${lang.sidebar.monthly}</span>
+                </a>
+                <div class="mdc-list-divider"></div>
+                <a class="mdc-list-item" href="#">
+                    <span class="mdc-list-item__ripple"></span>
+                    <i class="material-icons mdc-list-item__graphic" aria-hidden="true">info</i>
+                    <span class="mdc-list-item__text">About</span>
+                </a>
+            </nav>
+        </div>
+    </aside>
+    <div class="mdc-drawer-scrim"></div>
+    <main class="mdc-typography main-content" id="mainContent">
+        <div class="mdc-touch-target-wrapper mdc-card content" id="documentContent">${content}</div>
+    </main>
+    <footer id="footer">
+        <section class="footer-section--left">
+            <div class="footer-link--bili">
+                <a href="https://space.bilibili.com/413300639" target="_blank"><i
+                        class="bilibili-icon"></i>用Java写CSharp的萌新</a>
+            </div>
+        </section>
+        <section class="footer-section--center copyright">Copyright © ${new Date().getFullYear()} Ye_Tianshun. All
+            rights reserved.</section>
+        <section class="footer-section--right">
+            <div>Theme by <a href="https://material.io/" target="_blank">Material</a></div>
+            <div>${lang.footer.run1}<a>${parseInt((new Date().getTime()-new
+                    Date('2020/7/10').getTime())/86400000)}</a>${lang.footer.run2}</div>
+        </section>
+    </footer>
+    <div class="mdc-dialog alert-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="alertdialog" aria-modal="true" aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-content">
+                <h2 class="mdc-dialog__title" id="alert-dialog-title"></h2>
+                <div class="mdc-dialog__content" id="alert-dialog-content"></div>
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">${lang.dialog.ok}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+    <div class="mdc-dialog comment-dialog">
+        <div class="mdc-dialog__container">
+            <div class="mdc-dialog__surface" role="commentdialog" aria-modal="true"
+                aria-labelledby="comment-dialog-title" aria-describedby="comment-dialog-content">
+                <h2 class="mdc-dialog__title" id="comment-dialog-title">Comments</h2>
+                <div class="mdc-dialog__content" id="comment-dialog-content">
+                    <iframe src="/theme/comments" width="100%" height="100%"></iframe>
+                </div>
+                <div class="mdc-dialog__actions">
+                    <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="cancel">
+                        <div class="mdc-button__ripple"></div>
+                        <span class="mdc-button__label">${lang.dialog.ok}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-dialog__scrim"></div>
+    </div>
+</body>
+
+</html>

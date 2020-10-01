@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta id="doctitle" content="${lang.title.settings}">
+    <meta id="title" content="${lang.title.settings}">
+    <meta id="aid" content="-1">
+    <meta name="author" content="Ye_Tianshun">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <link href="/theme/css/main.css" rel="stylesheet">
+    <script src="/theme/js/main.js"></script>
+</head>
+
+<body>
+    <style>
+        .mdc-select__selected-text {
+            align-items: center;
+        }
+
+        .language-select .mdc-select__anchor,
+        .language-select .mdc-select__menu {
+            width: 280px;
+        }
+
+        .source-select .mdc-select__anchor,
+        .source-select .mdc-select__menu {
+            width: 180px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 1.46em;
+            font-weight: 300;
+            line-height: 1.3em;
+        }
+
+        h2 {
+            margin: 16px 0 4px;
+            font-size: 1.14em;
+            line-height: normal;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            margin: 10px;
+        }
+    </style>
+    <script>
+        window.init = () => {
+            const languageSelect = new mdc.select.MDCSelect(document.querySelector('.language-select'));
+            if (!localStorage['lang']) localStorage['lang'] = 'auto'
+            var detectLanguage = () => {
+                switch (localStorage['lang']) {
+                    case 'auto':
+                        languageSelect.selectedIndex = 0;
+                        languageSelect.selectedText.innerText = 'Auto Detect';
+                        break;
+                    case 'zh_CN':
+                        languageSelect.selectedIndex = 1;
+                        languageSelect.selectedText.innerText = 'Chinese (Simplified) [zh_CN]';
+                        break;
+                    case 'en_US':
+                        languageSelect.selectedIndex = 2;
+                        languageSelect.selectedText.innerText = 'English (United States) [en_US]';
+                        break;
+                }
+            }
+            detectLanguage();
+            languageSelect.menu.listen('click', e => {
+                localStorage['lang'] = e.target.dataset.value ? e.target.dataset.value : e.target.parentElement.dataset.value;
+                localStorage['refresh'] = '1';
+                detectLanguage();
+                location.reload();
+            });
+            const dynamicLoadSwitch = new mdc.switchControl.MDCSwitch(document.querySelector('.dyamic-load-switch'));
+            dynamicLoadSwitch.checked = localStorage['dyamicLoad'] == "true";
+            dynamicLoadSwitch.listen('click', () => {
+                localStorage['dyamicLoad'] = dynamicLoadSwitch.checked;
+            });
+            const sourceSelect = new mdc.select.MDCSelect(document.querySelector('.source-select'));
+            var detectSource = () => {
+                switch (localStorage['source']) {
+                    case '':
+                        sourceSelect.selectedIndex = 0;
+                        sourceSelect.selectedText.innerText = 'Default';
+                        break;
+                    case 'https://raw.githubusercontent.com/yts233/www/master/':
+                        sourceSelect.selectedIndex = 1;
+                        sourceSelect.selectedText.innerText = 'GitHub';
+                        break;
+                    case 'https://yts233.visualstudio.com/www/_apis/git/repositories/350654b2-9ea3-49a1-b776-983b16ee25cb/items?path=':
+                        sourceSelect.selectedIndex = 2;
+                        sourceSelect.selectedText.innerText = 'Azure DevOps 1';
+                        break;
+                    case 'https://dev.azure.com/yts233/www/_apis/git/repositories/350654b2-9ea3-49a1-b776-983b16ee25cb/items?path=':
+                        sourceSelect.selectedIndex = 3;
+                        sourceSelect.selectedText.innerText = 'Azure DevOps 2';
+                        break;
+                    default:
+                        sourceSelect.selectedIndex = -1;
+                        sourceSelect.selectedText.innerText = localStorage['source'];
+                        break;
+                }
+            }
+            detectSource();
+            sourceSelect.menu.listen('click', e => {
+                localStorage['source'] = e.target.dataset.value ? e.target.dataset.value : e.target.parentElement.dataset.value;
+                detectSource();
+            })
+            window.destory = () => {
+                languageSelect.destroy();
+                dynamicLoadSwitch.destroy();
+            }
+        }
+    </script>
+    <ul>
+        <li>
+            <h1>${lang.settings.type.general}</h1>
+            <ul>
+                <li>
+                    <h2>${lang.settings.dynamicLoad.title}</h2>
+                    <div class="mdc-switch dyamic-load-switch">
+                        <div class="mdc-switch__track"></div>
+                        <div class="mdc-switch__thumb-underlay">
+                            <div class="mdc-switch__thumb"></div>
+                            <input type="checkbox" id="dynamicLoadSwitch" class="mdc-switch__native-control"
+                                role="switch" aria-checked="false">
+                        </div>
+                    </div>
+                    <label for="dynamicLoadSwitch">&nbsp;&nbsp;${lang.settings.dynamicLoad.describe}</label>
+                </li>
+                <li>
+                    <h2>${lang.settings.language.title}</h2>
+                    <p>${lang.settings.language.describe}</p>
+                    <div class="mdc-select mdc-select--outlined mdc-select--no-label language-select">
+                        <div class="mdc-select__anchor">
+                            <span class="mdc-select__selected-text"></span>
+                            <span class="mdc-select__dropdown-icon"></span>
+                            <span class="mdc-notched-outline">
+                                <span class="mdc-notched-outline__leading"></span>
+                                <span class="mdc-notched-outline__trailing"></span>
+                            </span>
+                        </div>
+                        <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                            <ul class="mdc-list">
+                                <li class="mdc-list-item mdc-list-item--selected" aria-selected="true" role="option"
+                                    data-value="auto">
+                                    <span class="mdc-list-item__ripple"></span>
+                                    <span class="mdc-list-item__text">Auto Detect</span>
+                                </li>
+                                <li class="mdc-list-item" data-value="zh_CN">
+                                    <span class="mdc-list-item__ripple"></span>
+                                    <span class="mdc-list-item__text">Chinese (Simplified) [zh_CN]</span>
+                                </li>
+                                <li class="mdc-list-item" data-value="en_US">
+                                    <span class="mdc-list-item__ripple"></span>
+                                    <span class="mdc-list-item__text">English (United States) [en_US]</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <h2>${lang.settings.source.title}</h2>
+                    <p>${lang.settings.source.describe}</p>
+                    <div class="mdc-select mdc-select--outlined mdc-select--no-label source-select">
+                        <div class="mdc-select__anchor">
+                            <span class="mdc-select__selected-text"></span>
+                            <span class="mdc-select__dropdown-icon"></span>
+                            <span class="mdc-notched-outline">
+                                <span class="mdc-notched-outline__leading"></span>
+                                <span class="mdc-notched-outline__trailing"></span>
+                            </span>
+                        </div>
+                        <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                            <ul class="mdc-list">
+                                <li class="mdc-list-item mdc-list-item--selected" aria-selected="true" role="option"
+                                    data-value="">
+                                    <span class="mdc-list-item__ripple"></span>
+                                    <span class="mdc-list-item__text">Default</span>
+                                </li>
+                                <li class="mdc-list-item"
+                                    data-value="https://raw.githubusercontent.com/yts233/www/master/">
+                                    <span class="mdc-list-item__ripple"></span>
+                                    <span class="mdc-list-item__text">GitHub</span>
+                                </li>
+                                <li class="mdc-list-item"
+                                    data-value="https://yts233.visualstudio.com/www/_apis/git/repositories/350654b2-9ea3-49a1-b776-983b16ee25cb/items?path=">
+                                    <span class="mdc-list-item__ripple"></span>
+                                    <span class="mdc-list-item__text">Azure DevOps 1</span>
+                                </li>
+                                <li class="mdc-list-item"
+                                    data-value="https://dev.azure.com/yts233/www/_apis/git/repositories/350654b2-9ea3-49a1-b776-983b16ee25cb/items?path=">
+                                    <span class="mdc-list-item__ripple"></span>
+                                    <span class="mdc-list-item__text">Azure DevOps 2</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <h1>${lang.settings.type.advanced}</h1>
+            <ul>
+                <li>
+                    <h2>${lang.settings.delete.title}</h2>
+                    <p>${lang.settings.delete.describe}</p>
+                    <button class="mdc-button mdc-button--raised" style="background:#e21"
+                        onclick="localStorage.clear();localStorage['refresh']='1';location.href='/settings?message=%E5%88%A0%E9%99%A4%E5%AE%8C%E6%AF%95&'">
+                        <i class="mdc-button__icon material-icons">delete</i>
+                        <span class="mdc-button__label">${lang.settings.delete.delete}</span>
+                    </button>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</body>
+<script src="/theme/js/templateend.js"></script>
+<script src="/theme/js/detectes6.js"></script>
+
+</html>

@@ -1,0 +1,91 @@
+{
+    "refresh": "页面需要重载",
+    "title": {
+        "index": "主页",
+        "settings": "网站偏好设置",
+        "search":"搜索结果"
+    },
+    "appbar": {
+        "menu": "菜单",
+        "like": "次点赞",
+        "upgrade": "升级",
+        "search": "搜索",
+        "more": "更多",
+        "moreMenu": {
+            "thumbUp": "点赞",
+            "comment": "评论",
+            "share": "分享",
+            "settings": "设置"
+        }
+    },
+    "sidebar": {
+        "home": "网站首页",
+        "random": "手气不错",
+        "latest": "最新文档",
+        "comment": "最新评论",
+        "monthly": "按月归档"
+    },
+    "dialog": {
+        "ok": "确定",
+        "cancel": "取消",
+        "yes": "是",
+        "no": "否",
+        "retry": "重试",
+        "ignore": "忽略"
+    },
+    "settings": {
+        "type": {
+            "general": "常规",
+            "advanced": "高级"
+        },
+        "dynamicLoad": {
+            "title": "动态加载",
+            "describe": "动态加载页面以实现切换页面不需要刷新"
+        },
+        "language": {
+            "title": "语言",
+            "describe": "选择网站显示菜单、消息和通知时使用的语言",
+            "refresh": "刷新页面以生效"
+        },
+        "source": {
+            "title": "源",
+            "describe": "更改网站来源"
+        },
+        "delete": {
+            "title": "删除设置",
+            "describe": "这将删除当前的所有设置",
+            "delete": "删除"
+        }
+    },
+    "upgrade": {
+        "title": "您的浏览器需要更新",
+        "subtitle1": "您的浏览器可能无法正常显示此网页，",
+        "subtitle2": "请使用以下新版浏览器",
+        "chrome": {
+            "name": "Chrome",
+            "describe": "谷歌推出的快速, 简单, 稳定且安全的浏览器",
+            "url": "https://www.google.cn/chrome"
+        },
+        "firefox": {
+            "name": "Firefox",
+            "describe": "最快的浏览器",
+            "url": "https://firefox.com.cn"
+        },
+        "safari": {
+            "name": "Safari",
+            "describe": "由苹果公司设计用于Mac的产品",
+            "url": "https://www.apple.com/cn/safari"
+        },
+        "opera": {
+            "name": "Opera",
+            "describe": "快速, 小巧的浏览器",
+            "url": "https://www.opera.com/zh-cn"
+        },
+        "try": "试试Chrome",
+        "nope": "不用"
+    },
+    "footer": {
+        "run1": "本站已运行",
+        "run2": "天"
+    }
+}

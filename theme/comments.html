@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Comments</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Ye_Tianshun">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <link href="/theme/css/material.css" rel="stylesheet">
+    <script src="/theme/js/material.js"></script>
+    <link href="/theme/css/Roboto.css" rel="stylesheet">
+    <link href="/theme/css/MaterialIcons.css" rel="stylesheet">
+    <script src="/theme/js/jquery.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        header,
+        .info-section,
+        .content-section {
+            display: flex;
+            justify-content: center;
+        }
+
+        header {
+            flex-wrap: wrap;
+        }
+
+        .info-section {
+            flex-wrap: nowrap;
+            width: 100%;
+        }
+
+        main {
+            padding: 8px;
+        }
+
+        form {
+            width: 100%;
+            height: 100%;
+        }
+
+        .mdc-text-field {
+            margin: 5px;
+        }
+
+        .info-section .mdc-text-field {
+            width: 33.3%;
+        }
+
+        .content-text-field {
+            width: 100%;
+        }
+
+        .done-button {
+            position: absolute;
+            right: 13px;
+            top: 5pc;
+        }
+    </style>
+    <script>
+        addEventListener('load', () => {
+            const nickTextField = new mdc.textField.MDCTextField(document.querySelector('.nick-text-field'));
+            const mailTextField = new mdc.textField.MDCTextField(document.querySelector('.mail-text-field'));
+            const websiteTextField = new mdc.textField.MDCTextField(document.querySelector('.website-text-field'));
+            const contentTextField = new mdc.textField.MDCTextField(document.querySelector('.content-text-field'));
+            const doneButton = new mdc.ripple.MDCRipple(document.querySelector('.done-button'));
+            document.querySelector('.comment-form').onsubmit = e => e.returnValue = false;
+        });
+    </script>
+</head>
+
+<body>
+    <header>
+        <form class="comment-form">
+            <section class="info-section">
+                <label class="mdc-text-field mdc-text-field--filled nick-text-field">
+                    <span class="mdc-text-field__ripple"></span>
+                    <input class="mdc-text-field__input" type="text" aria-labelledby="nick-label" name="nick">
+                    <span class="mdc-floating-label" id="nick-label">Nick*</span>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+                <label class="mdc-text-field mdc-text-field--filled mail-text-field">
+                    <span class="mdc-text-field__ripple"></span>
+                    <input class="mdc-text-field__input" type="email" aria-labelledby="mail-label" name="mail">
+                    <span class="mdc-floating-label" id="mail-label">Mail*</span>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+                <label class="mdc-text-field mdc-text-field--filled website-text-field">
+                    <span class="mdc-text-field__ripple"></span>
+                    <input class="mdc-text-field__input" type="url" aria-labelledby="website-label" name="website">
+                    <span class="mdc-floating-label" id="website-label">Website</span>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+            </section>
+            <section class="content-section">
+                <label class="mdc-text-field mdc-text-field--filled content-text-field">
+                    <span class="mdc-text-field__ripple"></span>
+                    <input class="mdc-text-field__input" type="text" aria-labelledby="content-label" name="content">
+                    <span class="mdc-floating-label" id="content-label">Join the discussion</span>
+                    <span class="mdc-line-ripple"></span>
+                </label>
+            </section>
+            <button type="submit" class="mdc-fab mdc-fab--mini done-button" aria-label="Done">
+                <div class="mdc-fab__ripple"></div>
+                <span class="mdc-fab__icon material-icons">done</span>
+            </button>
+        </form>
+    </header>
+    <main class="mdc-typography">
+        <h6 class="mdc-typography--headline6">
+            ${commentCount} Comments:
+        </h6>
+        <ul>
+            <li>
+                https://www.google.com/search?q=
+            </li>
+        </ul>
+    </main>
+</body>
+
+</html>
